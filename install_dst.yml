@@ -20,7 +20,7 @@
   - name: Extract SteamCMD
     unarchive:
       src: /home/dst/steamcmd_linux.tar.gz
-      dest: /home/dst/server_dst
+      dest: /home/dst/
       copy: false
 
   - name: attempt to log into steam
