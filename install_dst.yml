@@ -1,0 +1,28 @@
+---
+- hosts: all 
+  become: true
+  become_user: dst 
+  become_method: sudo
+
+
+  tasks:
+  - name: wget SteamCMD
+    get_url:
+      url: https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz 
+      dest: /home/dst/
+
+  - name: Create DIR
+    file:
+      path: /home/dst/server_dst
+      state: directory
+      mode: 0755
+
+  - name: Extract SteamCMD
+    unarchive:
+      src: /home/dst/steamcmd_linux.tar.gz
+      dest: /home/dst/server_dst
+      copy: false
+
+  - name: attempt to log into steam
+    command: /home/dst/server_dst/steamcmd.sh +login anonymous +force_install_dir /home/dst/server_dst +app_update 343050 validate +quit
+...
