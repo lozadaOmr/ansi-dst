@@ -1,0 +1,34 @@
+---
+- hosts: all 
+  become: true
+  become_user: root
+  become_method: sudo
+
+
+  tasks:
+  - name: Install lib32gcc1 
+    apt:
+      name: lib32gcc1
+      state: present
+  
+  - name: Add user DST
+    user:
+      name: dst
+
+  - name: Enable i386 architecture
+    command: dpkg --add-architecture i386
+
+  - name: Update packages
+    apt:
+      update_cache: yes
+
+  - name: Install lib32stdc++6
+    apt:
+      name: lib32stdc++6
+      state: present
+
+  - name: Install libcurl4-gnutls-dev:i386
+    apt:
+      name: libcurl4-gnutls-dev:i386
+      state: present
+...
